@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
@@ -35,9 +35,15 @@ const options = [
 
 //items as props
 const App = () => {
+  const [selected, setSelected] = useState(options[0]);
+
   return (
     <div className="ui segment">
-      <Dropdown options={options} />
+      <Dropdown
+        selected={selected}
+        onSelectedChange={setSelected}
+        options={options}
+      />
       <Accordion items={items} />
       <Search />
     </div>
