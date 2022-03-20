@@ -23,17 +23,33 @@ const Search = () => {
     };
 
     //modificamos onde chamamos á búsqueda para evitar erro debido a config da api
-    if (term) {
-      search();
-    }
+    //añadimos setTimeout para que non busque cada vez que cambia o texto
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        search();
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [term]);
 
+  //Nunca usar <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>, xa que te fai vulnerable a xss (inyectar hmtl con js na app). solo proba neste caso
   const renderedResults = results.map((result) => {
     return (
       <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+          >
+            See
+          </a>
+        </div>
         <div className="content">
           <div className="header">{result.title}</div>
-          {result.snippet}
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
         </div>
       </div>
     );

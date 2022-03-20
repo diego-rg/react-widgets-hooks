@@ -20,7 +20,7 @@ const items = [
 //items as props
 const App = () => {
   return (
-    <div>
+    <div className="ui segment">
       <Accordion items={items} />
       <Search />
     </div>
