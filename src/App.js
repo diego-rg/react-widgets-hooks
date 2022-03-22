@@ -43,7 +43,10 @@ const App = () => {
 
   return (
     <div className="ui segment">
-      <button onClick={() => setShowDropdown(!showDropdown)}>
+      <button
+        className="ui button"
+        onClick={() => setShowDropdown(!showDropdown)}
+      >
         Toggle Dropdown
       </button>
       {showDropdown ? (
@@ -55,8 +58,11 @@ const App = () => {
         />
       ) : null}
       <h5 className={`colored-header--${selected.value}`}>Change my color!</h5>
+      <hr />
       <Accordion items={items} />
+      <hr />
       <Translate />
+      <hr />
       <Search />
     </div>
   );
