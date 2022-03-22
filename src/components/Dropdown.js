@@ -1,8 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Dropdown = ({ options, selected, onSelectedChange }) => {
   //para toggle o dropdown
   const [open, setOpen] = useState(false);
+  const ref = useRef();
+
+  //close dropdown. Executarase PRIMEIRO xa que os event normales e despois os de react
+  useEffect(() => {
+    const onBodyClick = (event) => {
+      if (ref.current.contains(event.target)) {
+        return;
+      }
+      setOpen(false);
+    };
+    document.body.addEventListener("click", onBodyClick, { capture: true });
+
+    return () => {
+      document.body.removeEventListener("click", onBodyClick, {
+        capture: true,
+      });
+    };
+  }, []);
+
 
   const renderedOptions = options.map((option) => {
     if (option.value === selected.value) {
@@ -20,7 +39,7 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
   });
 
   return (
-    <div className="ui form">
+    <div ref={ref} className="ui form">
       <div className="field">
         <label htmlFor="color-selection" className="label">
           Select a color
