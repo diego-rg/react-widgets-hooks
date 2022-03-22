@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
+import Translate from "./components/Translate";
 
 const items = [
   {
@@ -47,6 +48,7 @@ const App = () => {
       </button>
       {showDropdown ? (
         <Dropdown
+          label="Select a color"
           selected={selected}
           onSelectedChange={setSelected}
           options={options}
@@ -54,6 +56,7 @@ const App = () => {
       ) : null}
       <h5 className={`colored-header--${selected.value}`}>Change my color!</h5>
       <Accordion items={items} />
+      <Translate />
       <Search />
     </div>
   );

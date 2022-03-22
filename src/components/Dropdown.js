@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Dropdown = ({ options, selected, onSelectedChange }) => {
+const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   //para toggle o dropdown
   const [open, setOpen] = useState(false);
   const ref = useRef();
@@ -22,7 +22,6 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
     };
   }, []);
 
-
   const renderedOptions = options.map((option) => {
     if (option.value === selected.value) {
       return null; //uso común del null en react para non renderizar nada
@@ -42,7 +41,7 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
     <div ref={ref} className="ui form">
       <div className="field">
         <label htmlFor="color-selection" className="label">
-          Select a color
+          {label}
         </label>
         <div
           onClick={() => setOpen(!open)}
