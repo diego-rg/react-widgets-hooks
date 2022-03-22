@@ -1,3 +1,5 @@
+import "./App.css";
+
 import React, { useState } from "react";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
@@ -50,6 +52,7 @@ const App = () => {
           options={options}
         />
       ) : null}
+      <h5 className={`colored-header--${selected.value}`}>Change my color!</h5>
       <Accordion items={items} />
       <Search />
     </div>
