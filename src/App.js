@@ -36,6 +36,31 @@ const options = [
   },
 ];
 
+//Navegación (sin router)
+const showAccordion = () => {
+  if (window.location.pathname === "/") {
+    return <Accordion items={items} />;
+  }
+};
+
+const showList = () => {
+  if (window.location.pathname === "/list") {
+    return <Search />;
+  }
+};
+
+const showDropdown = () => {
+  if (window.location.pathname === "/dropdown") {
+    return <Dropdown />;
+  }
+};
+
+const showTranslate = () => {
+  if (window.location.pathname === "/translate") {
+    return <Translate />;
+  }
+};
+
 //items as props
 const App = () => {
   const [selected, setSelected] = useState(options[0]);
@@ -43,6 +68,8 @@ const App = () => {
 
   return (
     <div className="ui segment">
+      {showAccordion()}
+      {showList()}
       <button
         className="ui button"
         onClick={() => setShowDropdown(!showDropdown)}
@@ -58,12 +85,8 @@ const App = () => {
         />
       ) : null}
       <h5 className={`colored-header--${selected.value}`}>Change my color!</h5>
-      <hr />
-      <Accordion items={items} />
-      <hr />
-      <Translate />
-      <hr />
-      <Search />
+      {showDropdown()}
+      {showTranslate()}
     </div>
   );
 };
