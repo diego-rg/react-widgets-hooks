@@ -5,6 +5,7 @@ import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
 import Translate from "./components/Translate";
+import Route from "./components/Route";
 
 const items = [
   {
@@ -36,30 +37,30 @@ const options = [
   },
 ];
 
-//Navegación (sin router)
-const showAccordion = () => {
-  if (window.location.pathname === "/") {
-    return <Accordion items={items} />;
-  }
-};
+//Alternativa 1: Navegación (sin router)
+// const showAccordion = () => {
+//   if (window.location.pathname === "/") {
+//     return <Accordion items={items} />;
+//   }
+// };
 
-const showList = () => {
-  if (window.location.pathname === "/list") {
-    return <Search />;
-  }
-};
+// const showList = () => {
+//   if (window.location.pathname === "/list") {
+//     return <Search />;
+//   }
+// };
 
-const showDropdown = () => {
-  if (window.location.pathname === "/dropdown") {
-    return <Dropdown />;
-  }
-};
+// const showDropdown = () => {
+//   if (window.location.pathname === "/dropdown") {
+//     return <Dropdown />;
+//   }
+// };
 
-const showTranslate = () => {
-  if (window.location.pathname === "/translate") {
-    return <Translate />;
-  }
-};
+// const showTranslate = () => {
+//   if (window.location.pathname === "/translate") {
+//     return <Translate />;
+//   }
+// };
 
 //items as props
 const App = () => {
@@ -68,25 +69,23 @@ const App = () => {
 
   return (
     <div className="ui segment">
-      {showAccordion()}
-      {showList()}
-      <button
-        className="ui button"
-        onClick={() => setShowDropdown(!showDropdown)}
-      >
-        Toggle Dropdown
-      </button>
-      {showDropdown ? (
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      <Route path="/list">
+        <Search />
+      </Route>
+      <Route path="/dropdown">
         <Dropdown
           label="Select a color"
+          options={options}
           selected={selected}
           onSelectedChange={setSelected}
-          options={options}
         />
-      ) : null}
-      <h5 className={`colored-header--${selected.value}`}>Change my color!</h5>
-      {showDropdown()}
-      {showTranslate()}
+      </Route>
+      <Route path="/translate">
+        <Translate />
+      </Route>
     </div>
   );
 };
