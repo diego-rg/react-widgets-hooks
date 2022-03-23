@@ -24,7 +24,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
 
   const renderedOptions = options.map((option) => {
     if (option.value === selected.value) {
-      return null; //uso común del null en react para non renderizar nada
+      return null; //uso común de null en react para non renderizar nada
     }
     return (
       <div
@@ -55,6 +55,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
           </div>
         </div>
       </div>
+      <h5 className={`colored-header--${selected.value}`}>Change my color!</h5>
     </div>
   );
 };

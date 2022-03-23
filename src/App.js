@@ -65,7 +65,6 @@ const options = [
 //items as props
 const App = () => {
   const [selected, setSelected] = useState(options[0]);
-  const [showDropdown, setShowDropdown] = useState(true);
 
   return (
     <div className="ui segment">
